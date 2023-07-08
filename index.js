@@ -20,6 +20,6 @@ mongoose.connect('mongodb://localhost:27017/authCrud')
         console.log(error);
     });
 
-app.listen(4000, () => {
+app.listen(6000, () => {
     console.log("Server is running at port 4000");
 });
