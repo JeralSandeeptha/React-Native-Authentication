@@ -52,7 +52,7 @@ router.post('/login', async (req, res) => {
         //get user details related to this email
         const user = await UserSchema.findOne({ email: req.body.email });
         if (!user){
-            return res.status(404).json({
+            return res.status(400).json({
                 message: "Email not found"
             });
         }
@@ -80,6 +80,24 @@ router.post('/login', async (req, res) => {
     } catch (error) {
         res.status(500).json({
             message: "User login server error",
+            error: error.message
+        });
+    }
+});
+
+router.get('/', async (req, res) => {
+    try {
+        
+        const users = await UserSchema.find();
+
+        res.status(200).json({
+            message: "Get all users successfully",
+            data: users
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            message: "Get users server error",
             error: error.message
         });
     }
